@@ -3,6 +3,7 @@
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.keys import Keys
 
 driver = webdriver.Chrome(executable_path = ChromeDriverManager().install())
 #driver.maximize_window();
@@ -22,12 +23,6 @@ alert = driver.switch_to.alert
 alertStr = alert.text
 alert.accept()
 
-if "You are seeing this message" in alertStr:
-    print('OK')
-    driver.get("https://google.com")
-    driver.get_screenshot_as_file("captures/after.png")
-    driver.quit()
-else:
-    print('Error')
-    driver.quit()
-
+assert("You are seeing this message" in alertStr)
+driver.get_screenshot_as_file("captures/after.png")
+driver.quit()
